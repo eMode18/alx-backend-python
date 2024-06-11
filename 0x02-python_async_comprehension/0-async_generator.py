@@ -1,22 +1,21 @@
 #!/usr/bin/env python3
+'''Asynchronous Python Generator
 
-"""
-Asynchronous generator that yields random numbers between 0 and 10.
+This module defines an asynchronous generator that yields random
+numbers at a 1-second interval.
+'''
 
-This coroutine loops 10 times, asynchronously waiting for 1 second
-before yielding a random integer.
-
-Usage example:
-    async for num in async_generator():
-        print(num)
-"""
-
-import asyncio
 import random
+import asyncio
+from typing import Generator
 
 
-async def async_generator():
-    """Generate random numbers asynchronously."""
+async def async_generator() -> Generator[float, None, None]:
+    '''Yield a random number at a 1-second interval.
+
+    Yields:
+        float: A random number between 0 and 10.
+    '''
     for _ in range(10):
         await asyncio.sleep(1)
-        yield random.randint(0, 10)
+        yield random.random() * 10
